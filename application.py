@@ -2,8 +2,9 @@ from flask import Flask, request, render_template, flash, session, redirect
 from mysqlconnection import MySQLConnector
 from flask.ext.bcrypt import Bcrypt
 import re
+import random
 application = Flask(__name__)
-application.secret_key=os.urandom(12)
+appplication.secret_key='0ikjd4728301jjka!'
 bcrypt = Bcrypt(application)
 mysql = MySQLConnector(application, 'thewall')
 
@@ -15,6 +16,7 @@ def index():
 
 @application.route('/create_user',methods=["POST"])
 def createUser():
+
 	if len(request.form['email'])<1:
 		flash("Email cannot be blank!",'warning')
 	elif not EMAIL_REGEX.match(request.form['email']):
