@@ -2,9 +2,8 @@ from flask import Flask, request, render_template, flash, session, redirect
 from mysqlconnection import MySQLConnector
 from flask.ext.bcrypt import Bcrypt
 import re
-import random
 application = Flask(__name__)
-appplication.secret_key='0ikjd4728301jjka!'
+application.secret_key = "SoSoSecret"
 bcrypt = Bcrypt(application)
 mysql = MySQLConnector(application, 'thewall')
 
