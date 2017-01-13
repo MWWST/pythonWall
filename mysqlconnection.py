@@ -12,7 +12,7 @@ class MySQLConnection(object):
                 'port': '3306' # change the port to match the port your SQL server is running on
         }
         # this will use the above values to generate the path to connect to your sql database
-        DATABASE_URI = "mysql://{}:{}@aahkzdilqz2ddc.c5mx1fwbbppr.us-east-1.rds.amazonaws.com{}/{}".format(config['user'], config['password'], config['port'], config['database'])
+        DATABASE_URI = "mysql://{}:{}@aarlq17w0w7vvw.ct0hnq2ct2gz.us-east-1.rds.amazonaws.com:3306{}/{}".format(config['user'], config['password'], config['port'], config['database'])
         app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URI
         app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
         # establish the connection to database
