@@ -4,8 +4,8 @@ from flask.ext.bcrypt import Bcrypt
 import re
 application = Flask(__name__)
 application.secret_key = "SoSoSecret"
-bcrypt = Bcrypt(app)
-mysql = MySQLConnector(app, 'thewall')
+bcrypt = Bcrypt(application)
+mysql = MySQLConnector(application, 'thewall')
 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 
