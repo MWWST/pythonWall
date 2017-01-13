@@ -101,5 +101,11 @@ def logout():
 	session.clear()
 	return redirect('/')
 
-application.run(debug=True)
+# application.run(debug=True)
+
+if __name__ == "__main__":
+    # Setting debug to True enables debug output. This line should be
+    # removed before deploying a production app.
+    application.debug = True
+    application.run()
 
