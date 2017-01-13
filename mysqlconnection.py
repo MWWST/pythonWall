@@ -5,14 +5,14 @@ from sqlalchemy.sql import text
 class MySQLConnection(object):
     def __init__(self, app, db):
         config = {
-                'host': 'localhost',
+                'host': 'aavezdw5998vsv.ct0hnq2ct2gz.us-east-1.rds.amazonaws.com',
                 'database': db, # we got db as an argument
                 'user': 'Weitzmam',
                 'password': 'i229rorY!',
                 'port': '3306' # change the port to match the port your SQL server is running on
         }
         # this will use the above values to generate the path to connect to your sql database
-        DATABASE_URI = "mysql://{}:{}@aavezdw5998vsv.ct0hnq2ct2gz.us-east-1.rds.amazonaws.com:{}/{}".format(config['user'], config['password'], config['port'], config['database'])
+        DATABASE_URI = "mysql://{}:{}@{}{}/{}".format(config['user'], config['password'],config['host'], config['port'], config['database'])
         app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URI
         app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
         # establish the connection to database
