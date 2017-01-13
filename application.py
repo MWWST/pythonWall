@@ -39,7 +39,6 @@ def createUser():
 		else:
 			flash("Problem with registration, try again",'warning')
 			return redirect('/')
-	return redirect('/')
 
 @application.route('/login',methods=['POST'])
 def login():
