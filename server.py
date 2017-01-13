@@ -2,18 +2,18 @@ from flask import Flask, request, render_template, flash, session, redirect
 from mysqlconnection import MySQLConnector
 from flask.ext.bcrypt import Bcrypt
 import re
-application = Flask(__name__)
-application.secret_key = "SoSoSecret"
+app= Flask(__name__)
+app.secret_key = "SoSoSecret"
 bcrypt = Bcrypt(app)
 mysql = MySQLConnector(app, 'thewall')
 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 
-@application.route('/',methods=['GET'])
+@app.route('/',methods=['GET'])
 def index():
 	return render_template('index.html')
 
-@application.route('/create_user',methods=["POST"])
+@app.route('/create_user',methods=["POST"])
 def createUser():
 
 	if len(request.form['email'])<1:
@@ -41,7 +41,7 @@ def createUser():
 			flash("Problem with registration, try again",'warning')
 			return redirect('/')
 
-@application.route('/login',methods=['POST'])
+@app.route('/login',methods=['POST'])
 def login():
 	email = request.form['email']
 	password = request.form['password']
@@ -62,7 +62,7 @@ def login():
 		flash("invalid login credentials","warning")
 		return redirect('/')
 
-@application.route('/wall')
+@app.route('/wall')
 def wall():
 	if 'loggedIn' not in session:
 		flash("Not Authorized","warning")
@@ -76,7 +76,7 @@ def wall():
 		comments = mysql.query_db(queryComments)
 		return render_template('wall.html',messages=messages,comments=comments)
 
-@application.route('/message/create',methods=["POST"])
+@app.route('/message/create',methods=["POST"])
 def createMessage():
 	message = request.form['message']
 
@@ -86,7 +86,7 @@ def createMessage():
 		results = mysql.query_db(query,query_data)
 		return redirect('/wall')
 
-@application.route('/comment/create',methods=["POST"])
+@app.route('/comment/create',methods=["POST"])
 def createComment():
 	comment = request.form['comment']
 	messageId = request.form['message_id']
@@ -96,10 +96,10 @@ def createComment():
 		results = mysql.query_db(query,query_data)
 		return redirect('/wall')
 
-@application.route('/logout')
+@app.route('/logout')
 def logout():
 	session.clear()
 	return redirect('/')
 
-application.run(debug=True)
+app.run(debug=True)
 
